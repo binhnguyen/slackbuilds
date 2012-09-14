@@ -63,6 +63,10 @@ if ! strings $PKG/libflashplayer.so | grep -wq "^${VERSION}$" 2>/dev/null ; then
   sleep 10
 fi
 
+# Use the real version
+REALVERS=$(strings $PKG/libflashplayer.so | grep "^LNX" | cut -d' ' -f2 | tr ',' '.')
+VERSION=$REALVERS
+
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
 mv $PKG/libflashplayer.so $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
 
